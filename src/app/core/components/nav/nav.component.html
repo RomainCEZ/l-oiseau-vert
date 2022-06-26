@@ -13,17 +13,9 @@
     <li
       class="hover:bg-secondary-focus active:bg-accent text-white text-center"
     >
-      <a class="flex justify-center" routerLink="/register">S'enregistrer</a>
-    </li>
-    <li
-      class="hover:bg-secondary-focus active:bg-accent text-white text-center"
-    >
-      <a class="flex justify-center" routerLink="/login">Se connecter</a>
-    </li>
-    <li
-      class="hover:bg-secondary-focus active:bg-accent text-white text-center"
-    >
-      <a class="flex justify-center" routerLink="/login">Déconnexion</a>
+      <button class="flex justify-center" (click)="onLogout()">
+        Déconnexion
+      </button>
     </li>
   </ul>
 </nav>
