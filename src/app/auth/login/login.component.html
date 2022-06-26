@@ -9,7 +9,7 @@
   <label class="flex flex-col"
     >Email :
     <input
-      class="m-1 p-2 px-3 border-2 rounded-lg border-secondary"
+      class="input m-1 p-2 px-3 border-2 rounded-lg border-secondary"
       type="email"
       formControlName="email"
     />
@@ -17,13 +17,14 @@
   <label class="flex flex-col"
     >Mot de passe :
     <input
-      class="m-1 p-2 px-3 border-2 rounded-lg border-secondary"
+      class="input m-1 p-2 px-3 border-2 rounded-lg border-secondary"
       type="password"
       formControlName="password"
     />
   </label>
   <button
     class="m-1 btn rounded-lg bg-primary hover:bg-secondary-focus active:bg-accent text-white"
+    ngClass="{loading : true}"
     type="submit"
     [disabled]="loading"
   >

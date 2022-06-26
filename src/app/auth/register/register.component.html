@@ -10,7 +10,7 @@
     <label class="flex flex-col"
       >Email :
       <input
-        class="m-1 p-2 px-3 border-2 rounded-lg border-secondary"
+        class="input m-1 p-2 px-3 border-2 rounded-lg border-secondary"
         type="email"
         formControlName="email"
       />
@@ -18,7 +18,7 @@
     <label class="flex flex-col"
       >Nom d'utilisateur :
       <input
-        class="m-1 p-2 px-3 border-2 rounded-lg border-secondary"
+        class="input m-1 p-2 px-3 border-2 rounded-lg border-secondary"
         type="text"
         formControlName="username"
       />
@@ -26,7 +26,7 @@
     <label class="flex flex-col"
       >Mot de passe :
       <input
-        class="m-1 p-2 px-3 border-2 rounded-lg border-secondary"
+        class="input m-1 p-2 px-3 border-2 rounded-lg border-secondary"
         type="password"
         formControlName="password"
       />
@@ -34,13 +34,14 @@
     <label class="flex flex-col"
       >Confirmer le mot de passe :
       <input
-        class="m-1 p-2 px-3 border-2 rounded-lg border-secondary"
+        class="input m-1 p-2 px-3 border-2 rounded-lg border-secondary"
         type="password"
         formControlName="confirmPassword"
       />
     </label>
     <button
       class="m-1 btn btn-primary rounded-lg hover:bg-secondary active:bg-accent text-white"
+      ngClass="{loading : true}"
       type="submit"
     >
       S'enregistrer
