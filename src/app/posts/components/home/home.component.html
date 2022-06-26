@@ -1,13 +1,15 @@
 <div class="flex flex-col sm:m-auto sm:max-w-xl font-bold">
-  <p class="text-center text-lg font-bold p-5">Bonjour, {{ username }} !</p>
+  <p class="text-center text-lg font-bold p-5">
+    Bonjour, {{ username$ | async }} !
+  </p>
   <form
     class="form-control gap-4 p-4 sm:border-2 sm:rounded-md border-primary shadow-lg"
-    (submit)="postTextContent($event)"
+    (submit)="onPostContent()"
   >
     <textarea
       #textContentArea
       class="textarea textarea-primary h-32"
-      placeholder="test"
+      placeholder="Laissez un message !"
       [value]="textContent"
       (input)="changeText(textContentArea.value)"
       maxlength="280"
