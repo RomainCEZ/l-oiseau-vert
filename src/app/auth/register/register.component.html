@@ -1,0 +1,58 @@
+<section>
+  <p class="text-center text-lg font-bold mb-5 p-5">
+    Enregistrez-vous pour rejoindre notre communauté !
+  </p>
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="onRegister()"
+    class="flex flex-col gap-5 sm:m-auto p-4 sm:max-w-xl font-bold border-2 sm:rounded-md border-primary shadow-lg"
+  >
+    <label class="flex flex-col"
+      >Email :
+      <input
+        class="m-1 p-2 px-3 border-2 rounded-lg border-secondary"
+        type="email"
+        formControlName="email"
+      />
+    </label>
+    <label class="flex flex-col"
+      >Nom d'utilisateur :
+      <input
+        class="m-1 p-2 px-3 border-2 rounded-lg border-secondary"
+        type="text"
+        formControlName="username"
+      />
+    </label>
+    <label class="flex flex-col"
+      >Mot de passe :
+      <input
+        class="m-1 p-2 px-3 border-2 rounded-lg border-secondary"
+        type="password"
+        formControlName="password"
+      />
+    </label>
+    <label class="flex flex-col"
+      >Confirmer le mot de passe :
+      <input
+        class="m-1 p-2 px-3 border-2 rounded-lg border-secondary"
+        type="password"
+        formControlName="confirmPassword"
+      />
+    </label>
+    <button
+      class="m-1 btn btn-primary rounded-lg hover:bg-secondary active:bg-accent text-white"
+      type="submit"
+    >
+      S'enregistrer
+    </button>
+  </form>
+  <p class="flex flex-wrap justify-center font-bold mt-4 p-2">
+    Si vous avez déjà un compte,&nbsp;
+    <a
+      class="text-primary hover:text-accent active:text-accent-focus"
+      routerLink="/login"
+    >
+      connectez-vous ici</a
+    >.
+  </p>
+</section>

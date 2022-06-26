@@ -1,0 +1,23 @@
+<div class="flex flex-col sm:m-auto sm:max-w-xl font-bold">
+  <p class="text-center text-lg font-bold p-5">Bonjour, {{ username }} !</p>
+  <form
+    class="form-control gap-4 p-4 sm:border-2 sm:rounded-md border-primary shadow-lg"
+    (submit)="postTextContent($event)"
+  >
+    <textarea
+      #textContentArea
+      class="textarea textarea-primary h-32"
+      placeholder="test"
+      [value]="textContent"
+      (input)="changeText(textContentArea.value)"
+      maxlength="280"
+    ></textarea>
+
+    <button
+      class="btn btn-primary rounded-lg hover:bg-secondary active:bg-accent text-white"
+    >
+      Publier
+    </button>
+  </form>
+  <app-post-container></app-post-container>
+</div>
