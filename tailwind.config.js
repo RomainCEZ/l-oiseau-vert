@@ -4,7 +4,7 @@ module.exports = {
   purge: {
     content: ["./src/**/*.{html,ts}"],
   },
-  darkMode: "class",
+  darkMode: ["class", '[data-mode="dark"]'],
   theme: {
     extend: {},
   },
@@ -14,7 +14,7 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        mytheme: {
+        lightTheme: {
           primary: "#15803d",
           secondary: "#059669",
           accent: "#10b981",
@@ -26,8 +26,20 @@ module.exports = {
           error: "#F87272",
         },
       },
+      {
+        darkTheme: {
+          primary: "#15803d",
+          secondary: "#059669",
+          accent: "#10b981",
+          neutral: "#3D4451",
+          "base-100": "#111111",
+          info: "#3ABFF8",
+          success: "#36D399",
+          warning: "#FBBD23",
+          error: "#F87272",
+        },
+      },
     ],
-    darkTheme: "forest",
   },
   plugins: [require("daisyui")],
 };
