@@ -5,5 +5,20 @@
     <img src="assets/bird-2-64.png" />
     <h1 class="text-2xl">L'Oiseau Vert</h1>
   </a>
-  <app-nav></app-nav>
+  <div class="flex items-center">
+    <div class="m-5" data-toggle-theme="darkTheme">
+      <label class="flex label cursor-pointer">
+        <input type="checkbox" class="toggle toggle-primary" checked />
+      </label>
+    </div>
+    <div *ngIf="!(isLoggedIn$ | async)">
+      <button
+        class="btn bg-primary hover:bg-secondary-focus active:bg-accent text-white text-center dark:bg-accent"
+        routerLink="/login"
+      >
+        Se connecter
+      </button>
+    </div>
+    <app-nav *ngIf="isLoggedIn$ | async"></app-nav>
+  </div>
 </header>
