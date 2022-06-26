@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { map, Observable } from 'rxjs';
 import { Post } from '../../../core/models/Post';
-import { PostsService } from '../../../services/posts.service';
+import { PostsService } from '../../services/posts.service';
 
 @Component({
   selector: 'app-post-container',
@@ -10,12 +11,14 @@ import { PostsService } from '../../../services/posts.service';
 })
 export class PostContainerComponent implements OnInit {
 
-  constructor(private postsService: PostsService) { }
+  constructor(private router: ActivatedRoute) { }
 
   posts$!: Observable<Post[]>
 
   ngOnInit(): void {
-    this.posts$ = this.postsService.getAllPosts()
+    this.posts$ = this.router.data.pipe(
+      map(data => data['posts'])
+    )
   }
 
 }
