@@ -3,7 +3,7 @@
 >
   <div class="flex justify-between">
     <p>Par {{ post.author }}</p>
-    <p>Publié le {{ post.creationDate | date: "dd MMMM yyyy à HH:mm" }}</p>
+    <p>{{ +post.creationDate | TimeAgo }}</p>
   </div>
   <div class="p-4 break-words">{{ post.content }}</div>
   <div class="p-2"></div>
