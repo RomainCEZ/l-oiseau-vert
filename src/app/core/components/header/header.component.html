@@ -11,14 +11,6 @@
         <input type="checkbox" class="toggle toggle-primary" checked />
       </label>
     </div>
-    <div *ngIf="!(isLoggedIn$ | async)">
-      <button
-        class="btn bg-primary hover:bg-secondary-focus active:bg-accent text-white text-center dark:bg-accent"
-        routerLink="/login"
-      >
-        Se connecter
-      </button>
-    </div>
     <app-nav *ngIf="isLoggedIn$ | async"></app-nav>
   </div>
 </header>
