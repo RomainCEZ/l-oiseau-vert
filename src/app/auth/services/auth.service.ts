@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, tap, Observable, BehaviorSubject, catchError, of } from 'rxjs';
+import { map, tap, BehaviorSubject, catchError, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { LoginInfo } from '../../core/models/LoginInfo';
 import { RegisterInfo } from '../../core/models/RegisterInfo';
@@ -31,6 +31,7 @@ export class AuthService {
   }
   isLoggedIn: boolean = false
 
+
   private setLoadingStatus(loading: boolean) {
     this._loading$.next(loading)
   }
@@ -47,6 +48,16 @@ export class AuthService {
         this._userSession$.next(userInfos)
         this.setIsLoggedIn(true)
         this.setLoadingStatus(false)
+        this.router.navigateByUrl("/")
+      })
+    ).subscribe()
+  }
+
+  public relog(): void {
+    this.http.get<UserSession>(`${environment.apiUrl}auth/`).pipe(
+      tap(userInfos => {
+        this._userSession$.next(userInfos)
+        this.setIsLoggedIn(true)
         this.router.navigateByUrl("/")
       })
     ).subscribe()

@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.initObservables()
     this.initForm()
+    this.relog()
   }
 
   private initObservables() {
@@ -38,6 +39,10 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void {
     this.authService.login(this.loginForm.value)
+  }
+
+  relog(): void {
+    this.authService.relog()
   }
 
 }

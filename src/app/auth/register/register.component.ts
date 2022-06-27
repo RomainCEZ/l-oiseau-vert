@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.initObservables()
     this.initForm()
+    this.relog()
   }
 
   private initObservables() {
@@ -44,5 +45,9 @@ export class RegisterComponent implements OnInit {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  relog(): void {
+    this.authService.relog()
   }
 }
