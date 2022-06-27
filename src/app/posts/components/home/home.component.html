@@ -4,19 +4,19 @@
   </p>
   <form
     class="form-control gap-4 p-4 sm:border-2 sm:rounded-md border-primary shadow-lg"
-    (submit)="onPostContent()"
+    [formGroup]="newPostForm"
+    (ngSubmit)="onPostContent()"
   >
     <textarea
-      #textContentArea
       class="textarea textarea-primary h-32"
       placeholder="Laissez un message !"
-      [value]="textContent"
-      (input)="changeText(textContentArea.value)"
+      formControlName="content"
       maxlength="280"
     ></textarea>
 
     <button
       class="btn btn-primary rounded-lg hover:bg-secondary active:bg-accent text-white"
+      type="submit"
     >
       Publier
     </button>
