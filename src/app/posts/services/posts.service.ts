@@ -41,17 +41,21 @@ export class PostsService {
   }
 
   public getNextTenPosts() {
-    this.setLoadingStatus(!true)
+    this.setLoadingStatus(true)
     this.http.get<Post[]>(`${environment.apiUrl}posts/next/${this.oldestPostDate}`).pipe(
       tap(posts => {
         posts.length ? this.oldestPostDate = posts[posts.length - 1].creationDate : posts
         this._posts$.next(this._posts$.getValue().concat(posts))
-        this.setLoadingStatus(!false)
+        this.setLoadingStatus(false)
       })
     ).subscribe()
   }
 
   public sendPost(post: string): Observable<void> {
     return this.http.post<void>(`${environment.apiUrl}posts`, post)
+  }
+
+  public getPostById(id: string): Observable<Post> {
+    return this.http.get<Post>(`${environment.apiUrl}posts/${id}`)
   }
 }

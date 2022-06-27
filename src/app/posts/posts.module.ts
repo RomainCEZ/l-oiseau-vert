@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TimeAgoPipe } from '../core/pipes/TimeAgoPipe';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PostSkeletonComponent } from './components/post-skeleton/post-skeleton.component';
+import { SinglePostComponent } from '../single-post/single-post.component';
 
 
 
@@ -17,6 +18,7 @@ import { PostSkeletonComponent } from './components/post-skeleton/post-skeleton.
     HomeComponent,
     PostComponent,
     PostSkeletonComponent,
+    SinglePostComponent,
     PostContainerComponent,
     TimeAgoPipe
   ],

@@ -1,10 +1,12 @@
-<article
-  class="flex flex-col p-3 border border-primary shadow-lg divide-y divide-primary"
->
-  <div class="flex justify-between">
-    <p>Par {{ post.author }}</p>
-    <p>{{ +post.creationDate | TimeAgo }}</p>
-  </div>
-  <div class="p-4 break-words">{{ post.content }}</div>
-  <div class="p-2"></div>
-</article>
+<a [routerLink]="'post/' + post.id.toString()">
+  <article
+    class="flex flex-col p-3 border border-primary shadow-lg divide-y divide-primary"
+  >
+    <div class="flex justify-between">
+      <p>Par {{ post.author }}</p>
+      <p>{{ +post.creationDate | TimeAgo }}</p>
+    </div>
+    <div class="p-4 break-words">{{ post.content }}</div>
+    <div class="p-2"></div>
+  </article>
+</a>
