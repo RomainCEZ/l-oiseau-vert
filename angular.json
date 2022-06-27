@@ -91,7 +91,7 @@
               {
                 "glob": "_redirects",
                 "input": "src",
-                "output": "/"
+                "output": "dist/l-oiseau-vert"
             }
             ],
             "styles": [
