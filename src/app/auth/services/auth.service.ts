@@ -13,39 +13,60 @@ import { UserSession } from '../../core/models/UserSession';
 })
 export class AuthService {
 
-  private subject = new BehaviorSubject<UserSession | null>(null);
+  constructor(private http: HttpClient, private router: Router) { }
 
-  userSession$: Observable<UserSession | null> = this.subject.asObservable()
-  isLoggedIn$!: Observable<boolean>
+  private _userSession$ = new BehaviorSubject<UserSession>({ id: '', username: '' });
+  get userSession$() {
+    return this._userSession$.asObservable()
+  }
+
+  private _loading$ = new BehaviorSubject<boolean>(false)
+  get loading$() {
+    return this._loading$.asObservable()
+  }
+
+  private _isLoggedIn$ = new BehaviorSubject<boolean>(false)
+  get isLoggedIn$() {
+    return this._isLoggedIn$.asObservable()
+  }
   isLoggedIn: boolean = false
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.isLoggedIn$ = this.userSession$.pipe(
-      map(userSession => userSession !== null),
-    )
+  private setLoadingStatus(loading: boolean) {
+    this._loading$.next(loading)
   }
 
-  public login(loginForm: LoginInfo): Observable<UserSession> {
-    return this.http.post<UserSession>(`${environment.apiUrl}auth/login`, loginForm).pipe(
-      tap(userInfos => this.subject.next(userInfos)),
-      tap(() => this.isLoggedIn = true),
-      tap(() => this.router.navigateByUrl("/"))
-    )
-
+  private setIsLoggedIn(loggedIn: boolean) {
+    this.isLoggedIn = loggedIn
+    this._isLoggedIn$.next(loggedIn)
   }
 
-  public register(registerForm: RegisterInfo) {
-    return this.http.post<UserSession>(`${environment.apiUrl}auth/register`, registerForm).pipe(
+  public login(loginForm: LoginInfo): void {
+    this.setLoadingStatus(true)
+    this.http.post<UserSession>(`${environment.apiUrl}auth/login`, loginForm).pipe(
+      tap(userInfos => {
+        this._userSession$.next(userInfos)
+        this.setIsLoggedIn(true)
+        this.setLoadingStatus(false)
+        this.router.navigateByUrl("/")
+      })
+    ).subscribe()
+  }
+
+  public register(registerForm: RegisterInfo): void {
+    this.http.post<UserSession>(`${environment.apiUrl}auth/register`, registerForm).pipe(
       map(() => true),
       catchError(() => of(false)),
-      tap(success => success ? this.login({ email: registerForm.email, password: registerForm.password }).subscribe() : success)
-    )
+      tap(success => success ? this.login({ email: registerForm.email, password: registerForm.password }) : success)
+    ).subscribe()
   }
 
-  public logout(): Observable<UserSession> {
-    return this.http.delete<UserSession>(`${environment.apiUrl}auth/logout`).pipe(
-      tap(() => this.subject.next(null)),
-      tap(() => this.isLoggedIn = false),
-    )
+  public logout(): void {
+    this.http.delete<UserSession>(`${environment.apiUrl}auth/logout`).pipe(
+      tap(() => {
+        this._userSession$.next({ id: '', username: '' })
+        this.setIsLoggedIn(false)
+        this.router.navigateByUrl("/login")
+      })
+    ).subscribe()
   }
 }
