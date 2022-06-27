@@ -6,8 +6,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { NavComponent } from './components/nav/nav.component';
 import * as fr from '@angular/common/locales/fr';
 import { RouterModule } from '@angular/router';
-import { PostContainerComponent } from '../posts/components/post-container/post-container.component';
-import { PostsModule } from '../posts/posts.module';
+import { NgIconsModule } from '@ng-icons/core';
+import { MatMenu, MatChat } from '@ng-icons/material-icons/baseline';
 
 
 
@@ -19,7 +19,8 @@ import { PostsModule } from '../posts/posts.module';
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    NgIconsModule.withIcons({ MatMenu, MatChat })
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr_FR' },
@@ -27,7 +28,8 @@ import { PostsModule } from '../posts/posts.module';
       provide: HTTP_INTERCEPTORS,
       useClass: CustomInterceptor,
       multi: true
-    }
+    },
+
   ],
   exports: [
     HeaderComponent
