@@ -11,17 +11,24 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  loading$!: Observable<boolean>
   loginForm!: FormGroup
-  loginFormPreview!: Observable<{ email: string, password: string }>
-  loading: boolean = false
 
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder,
-    private router: Router
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    this.initObservables()
+    this.initForm()
+  }
+
+  private initObservables() {
+    this.loading$ = this.authService.loading$
+  }
+
+  private initForm() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required]],
       password: ['', Validators.required]
@@ -30,13 +37,7 @@ export class LoginComponent implements OnInit {
 
 
   onLogin(): void {
-    this.loading = true
-    this.authService.login(this.loginForm.value).subscribe(
-      data => {
-        this.router.navigateByUrl("/")
-        this.loading = false
-      }
-    )
+    this.authService.login(this.loginForm.value)
   }
 
 }
