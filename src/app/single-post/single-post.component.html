@@ -1,6 +1,6 @@
 <section class="flex flex-col sm:m-auto sm:max-w-xl font-bold gap-4">
   <a
-    class="mx-auto p-4 text-secondary hover:text-accent active:text-accent-focus"
+    class="mx-auto p-4 text-primary hover:text-accent active:text-accent-focus"
     routerLink="/"
     >Retour</a
   >
@@ -19,12 +19,12 @@
           *ngIf="post.authorId === (userId$ | async)"
         >
           <button
-            class="text-secondary hover:text-accent active:text-accent-focus"
+            class="text-primary hover:text-accent active:text-accent-focus"
           >
             Editer
           </button>
           <button
-            class="text-secondary hover:text-accent active:text-accent-focus"
+            class="text-primary hover:text-accent active:text-accent-focus"
           >
             Supprimer
           </button>
