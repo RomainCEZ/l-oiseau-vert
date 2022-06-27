@@ -8,13 +8,15 @@ import * as fr from '@angular/common/locales/fr';
 import { RouterModule } from '@angular/router';
 import { NgIconsModule } from '@ng-icons/core';
 import { MatMenu, MatChat } from '@ng-icons/material-icons/baseline';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    NavComponent
+    NavComponent,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,
