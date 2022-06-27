@@ -5,7 +5,10 @@ import { PostContainerComponent } from './components/post-container/post-contain
 import { HomeComponent } from './components/home/home.component';
 import { RouterModule } from '@angular/router';
 import { PostsService } from './services/posts.service';
-import { PostsResolver } from './resolvers/posts.resolver';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TimeAgoPipe } from '../core/pipes/TimeAgoPipe';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { PostSkeletonComponent } from './components/post-skeleton/post-skeleton.component';
 
 
 
@@ -13,19 +16,23 @@ import { PostsResolver } from './resolvers/posts.resolver';
   declarations: [
     HomeComponent,
     PostComponent,
-    PostContainerComponent
+    PostSkeletonComponent,
+    PostContainerComponent,
+    TimeAgoPipe
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
+    InfiniteScrollModule
   ],
   exports: [
     HomeComponent,
-    PostContainerComponent
+    PostContainerComponent,
+    TimeAgoPipe
   ],
   providers: [
-    PostsService,
-    PostsResolver
+    PostsService
   ]
 })
 export class PostsModule { }
