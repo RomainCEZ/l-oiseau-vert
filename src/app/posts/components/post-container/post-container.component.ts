@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Post } from '../../../core/models/Post';
 import { PostsService } from '../../services/posts.service';
 
@@ -11,14 +10,28 @@ import { PostsService } from '../../services/posts.service';
 })
 export class PostContainerComponent implements OnInit {
 
-  constructor(private router: ActivatedRoute) { }
+  constructor(
+    private postsService: PostsService,
+  ) { }
 
+  loading$!: Observable<boolean>
   posts$!: Observable<Post[]>
 
   ngOnInit(): void {
-    this.posts$ = this.router.data.pipe(
-      map(data => data['posts'])
-    )
+    this.initObservables()
+    this.postsService.getNextTenPosts()
+  }
+
+  private initObservables() {
+    this.loading$ = this.postsService.loading$
+    this.posts$ = this.postsService.posts$
+  }
+  getNextPosts() {
+    this.postsService.getNextTenPosts()
+  }
+
+  onScrollDown(e: any) {
+    this.getNextPosts()
   }
 
 }
