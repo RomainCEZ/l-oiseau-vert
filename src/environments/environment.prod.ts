@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "https://l-oiseau-vert-api.romaincez.net/api/"
+  apiUrl: "https://l-oiseau-vert.herokuapp.com/api/"
 };
