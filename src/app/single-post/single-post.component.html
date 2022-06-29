@@ -13,7 +13,7 @@
         <p>{{ +post.timestamp | TimeAgo }}</p>
       </div>
       <div class="divide-y divide-primary" *ngIf="!editing">
-        <div class="p-4 break-words">{{ post.content }}</div>
+        <div class="p-4 break-words font-medium">{{ post.content }}</div>
         <div class="flex items-end justify-end px-1">
           <div
             class="flex mt-3 gap-4"
@@ -41,7 +41,7 @@
         (ngSubmit)="onEditPost()"
       >
         <textarea
-          class="textarea textarea-primary mb-4 h-32 text-base"
+          class="textarea textarea-primary mb-4 h-32 text-base font-medium"
           placeholder="Laissez un message !"
           formControlName="content"
           maxlength="280"
