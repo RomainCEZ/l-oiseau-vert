@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, tap, BehaviorSubject, catchError, of } from 'rxjs';
+import { map, tap, BehaviorSubject, catchError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { LoginInfo } from '../../core/models/LoginInfo';
 import { RegisterInfo } from '../../core/models/RegisterInfo';
@@ -12,6 +12,7 @@ import { UserSession } from '../../core/models/UserSession';
   providedIn: 'root'
 })
 export class AuthService {
+  error: any;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -31,6 +32,10 @@ export class AuthService {
   }
   isLoggedIn: boolean = false
 
+  private _httpError$ = new BehaviorSubject<string>('')
+  get httpError$() {
+    return this._httpError$.asObservable()
+  }
 
   private setLoadingStatus(loading: boolean) {
     this._loading$.next(loading)
@@ -49,6 +54,10 @@ export class AuthService {
         this.setIsLoggedIn(true)
         this.setLoadingStatus(false)
         this.router.navigateByUrl("/")
+      }),
+      catchError(error => {
+        this._httpError$.next(error.status)
+        return error
       })
     ).subscribe()
   }
@@ -66,8 +75,11 @@ export class AuthService {
   public register(registerForm: RegisterInfo): void {
     this.http.post<UserSession>(`${environment.apiUrl}auth/register`, registerForm).pipe(
       map(() => true),
-      catchError(() => of(false)),
-      tap(success => success ? this.login({ email: registerForm.email, password: registerForm.password }) : success)
+      tap(success => success ? this.login({ email: registerForm.email, password: registerForm.password }) : success),
+      catchError(error => {
+        this._httpError$.next(error.error.message)
+        return error
+      })
     ).subscribe()
   }
 

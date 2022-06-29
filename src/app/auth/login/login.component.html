@@ -22,10 +22,12 @@
       formControlName="password"
     />
   </label>
+  <p class="text-center text-error">{{ errorMessage$ | async }}</p>
   <button
     class="m-1 btn rounded-lg bg-primary hover:bg-secondary-focus active:bg-accent text-white"
     ngClass="{loading : true}"
     type="submit"
+    [disabled]="loginForm.invalid"
   >
     Se connecter
   </button>
