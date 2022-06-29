@@ -1,12 +1,12 @@
 <nav class="dropdown dropdown-end">
   <label
     tabindex="0"
-    class="btn rounded-lg bg-base-100 hover:bg-secondary-focus active:bg-accent text-white"
+    class="btn rounded-lg bg-base-100 hover:bg-secondary-focus active:bg-accent text-primary hover:text-white"
     ><svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      class="inline-block w-5 h-5 stroke-current text-primary"
+      class="inline-block w-5 h-5 stroke-current"
     >
       <path
         stroke-linecap="round"
@@ -16,14 +16,12 @@
       ></path></svg
   ></label>
   <ul
-    class="menu dropdown-content mt-2 w-40 rounded-lg badge-primary divide-y divide-accent"
+    class="menu dropdown-content mt-2 w-40 rounded-lg border border-primary bg-base-100 divide-y divide-accent text-primary"
   >
-    <li class="hover:bg-secondary-focus active:bg-accent text-white">
+    <li class="hover:bg-secondary-focus active:bg-accent hover:text-white">
       <a class="flex justify-center" routerLink="/">Accueil</a>
     </li>
-    <li
-      class="hover:bg-secondary-focus active:bg-accent text-white text-center"
-    >
+    <li class="hover:bg-secondary-focus active:bg-accent hover:text-white">
       <button class="flex justify-center" (click)="onLogout()">
         Déconnexion
       </button>
