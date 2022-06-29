@@ -10,26 +10,59 @@
     <ng-container *ngIf="post$ | async as post">
       <div class="flex justify-between p-1">
         <p>Par {{ post.author }}</p>
-        <p>{{ +post.creationDate | TimeAgo }}</p>
+        <p>{{ +post.timestamp | TimeAgo }}</p>
       </div>
-      <div class="p-4 break-words">{{ post.content }}</div>
-      <div class="flex items-end justify-end px-1">
-        <div
-          class="flex mt-3 gap-4"
-          *ngIf="post.authorId === (userId$ | async)"
-        >
+      <div class="divide-y divide-primary" *ngIf="!editing">
+        <div class="p-4 break-words">{{ post.content }}</div>
+        <div class="flex items-end justify-end px-1">
+          <div
+            class="flex mt-3 gap-4"
+            *ngIf="post.authorId === (userId$ | async)"
+          >
+            <button
+              class="text-primary hover:text-accent active:text-accent-focus"
+              (click)="editPost()"
+            >
+              Editer
+            </button>
+            <button
+              class="text-primary hover:text-accent active:text-accent-focus"
+              (click)="deletePost(post.id)"
+            >
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+      <form
+        class="form-control pt-4 divide-y divide-primary"
+        *ngIf="editing"
+        [formGroup]="editPostForm"
+        (ngSubmit)="onEditPost()"
+      >
+        <textarea
+          class="textarea textarea-primary mb-4 h-32 text-base"
+          placeholder="Laissez un message !"
+          formControlName="content"
+          maxlength="280"
+        ></textarea>
+        <div class="flex items-end justify-end pt-3 px-1 gap-6">
           <button
             class="text-primary hover:text-accent active:text-accent-focus"
+            type="submit"
+            [disabled]="!editPostForm.valid"
+            (click)="onEditPost()"
           >
             Editer
           </button>
           <button
             class="text-primary hover:text-accent active:text-accent-focus"
+            (click)="cancelEdit()"
           >
-            Supprimer
+            Annuler
           </button>
         </div>
-      </div>
+      </form>
     </ng-container>
   </article>
 </section>
