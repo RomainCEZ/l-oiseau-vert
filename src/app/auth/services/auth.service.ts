@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, tap, BehaviorSubject, catchError } from 'rxjs';
+import { map, tap, BehaviorSubject, catchError, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { LoginInfo } from '../../core/models/LoginInfo';
 import { RegisterInfo } from '../../core/models/RegisterInfo';
@@ -55,9 +55,9 @@ export class AuthService {
         this.setLoadingStatus(false)
         this.router.navigateByUrl("/")
       }),
-      catchError(error => {
-        this._httpError$.next(error.status)
-        return error
+      catchError(data => {
+        this._httpError$.next(data.status)
+        return of(data)
       })
     ).subscribe()
   }
@@ -76,9 +76,9 @@ export class AuthService {
     this.http.post<UserSession>(`${environment.apiUrl}auth/register`, registerForm).pipe(
       map(() => true),
       tap(success => success ? this.login({ email: registerForm.email, password: registerForm.password }) : success),
-      catchError(error => {
-        this._httpError$.next(error.error.message)
-        return error
+      catchError(data => {
+        this._httpError$.next(data.error.message)
+        return of(data)
       })
     ).subscribe()
   }
