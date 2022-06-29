@@ -15,7 +15,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  private _userSession$ = new BehaviorSubject<UserSession>({ id: '', username: '' });
+  private _userSession$ = new BehaviorSubject<UserSession>({ userId: '', username: '' });
   get userSession$() {
     return this._userSession$.asObservable()
   }
@@ -74,7 +74,7 @@ export class AuthService {
   public logout(): void {
     this.http.delete<UserSession>(`${environment.apiUrl}auth/logout`).pipe(
       tap(() => {
-        this._userSession$.next({ id: '', username: '' })
+        this._userSession$.next({ userId: '', username: '' })
         this.setIsLoggedIn(false)
         this.router.navigateByUrl("/login")
       })

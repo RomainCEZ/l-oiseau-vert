@@ -1,6 +1,6 @@
 export class UserSession {
     constructor(
-        public id: string,
+        public userId: string,
         public username: string
     ) { }
 }
