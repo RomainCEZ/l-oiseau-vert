@@ -4,6 +4,6 @@ export class Post {
         public content: string,
         public authorId: string,
         public author: string,
-        public creationDate: number
+        public timestamp: number
     ) { }
 }
